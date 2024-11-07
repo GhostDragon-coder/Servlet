@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form method="post" action="add">
+	<label>Имя:
+		<input type="text" name="name"><br/><br/>
+	</label>
+	<label>Фамилия:
+		<input type="text" name="surname"><br/><br/>
+	</label>
+	<label>Зарплата:
+		<input type="text" name="salary"><br/><br/>
+	</label>
+	<button type="submit">Создать</button><br/>
+</form>
+
+<a href="index.jsp">Домой</a>
+</body>
+</html>

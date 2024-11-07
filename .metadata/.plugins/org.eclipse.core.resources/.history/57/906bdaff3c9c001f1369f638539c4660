@@ -1,0 +1,75 @@
+package ru.appline;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.catalina.User;
+
+import logic.Model;
+
+@WebServlet(urlPatterns = "/get")
+public class ServletList  extends HttpServlet {
+	
+	Model model = Model.getInstance();
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		if (id == 0) {
+			pw.println("<html>" + 
+						"<h3>Доступные пользователи: </h3>" +
+						"ID пользователя" +
+						"<ul>"
+						);
+			for (Map.Entry<Integer, User> entry : model.getFromList().entrySet()) {
+				pw.println("<li>" + entry.getKey() + "</li>" +
+						"<ul>" +
+						"<li>Имя: " + entry.getValue().getName() + "</li>" +
+						"<li>Фамилия: " + entry.getValue().getSurname() + "</li>" +
+						"<li>Зарплата: " + entry.getValue().getSalary() + "</li>" +
+						"</ul>"
+						);
+			}
+			pw.println("</ul>" +
+						"<a href=\"index.jsp\"> Домой</a><br/>" +
+						"</html>"
+						);
+			
+		} else if (id > 0) {
+			if (id > model.getFromList().size()) {
+				pw.println("<html>" + 
+							"<h3>Такого пользователя нет :(</h3>" +
+							"<a href=\"index.jsp\"> Домой</a><br/>" +
+							"</html>"
+							);
+			} else {
+				pw.println("<html>" + 
+						"<h3>Запрошенный пользователь</h3>" +
+						"<br/>" +
+						"Имя: " + model.getFromList().get(id).getName() + "<br/>" +
+						"Фамилия: " + model.getFromList().get(id).getSurname() + "<br/>" +
+						"Зарплата: " + model.getFromList().get(id).getSalary() + "<br/>" +
+						"<a href=\"index.jsp\"> Домой</a><br/>" +
+						"</html>"
+						);
+			}
+		} else {
+			pw.println("<html>" + 
+					"<h3>ID должен быть больше нуля!</h3>" +
+					"<a href=\"index.jsp\"> Домой</a><br/>" +
+					"</html>"
+					);
+		}
+	
+	}
+}

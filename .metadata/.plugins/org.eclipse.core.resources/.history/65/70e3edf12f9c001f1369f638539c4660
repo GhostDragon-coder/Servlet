@@ -1,0 +1,9 @@
+package ru.appline;
+package ru.appline;
+
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet(urlPatterns = "/get")
+public class ServletList {
+
+}

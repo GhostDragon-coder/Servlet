@@ -1,0 +1,10 @@
+package ru.appline;
+package logic;
+
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet(urlPatterns = "/add")
+public class ServletAdd {
+	
+	
+}

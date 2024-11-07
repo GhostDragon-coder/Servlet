@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form id="userForm">
+<label>Имя:
+<input type="text" name="name"><br/><br/>
+</label>
+<label>Фамилия:
+<input type="text" name="surname"><br/><br/>
+</label>
+<label>Зарплата:
+<input type="text" name="salary"><br/><br/>
+</label>
+<button type="submit">Создать</button>
+</form><br/>
+
+<a href="index.jsp">Домой</a>
+
+<script>
+document.getElementById('userForm').addEventListener('submit', function(event) {
+event.preventDefault(); // Предотвращаем стандартное поведение формы
+
+// Собираем данные формы
+const formData = new FormData(event.target);
+const data = {};
+formData.forEach((value, key) => {
+data[key] = value;
+});
+
+// Отправляем данные в формате JSON
+fetch('add', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json'
+},
+body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(result => {
+console.log('Success:', result);
+// Здесь можно добавить код для обработки успешного ответа
+})
+.catch(error => {
+console.error('Error:', error);
+// Здесь можно добавить код для обработки ошибки
+});
+});
+</script>
+</body>
+</html>

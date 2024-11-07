@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form id="userForm">
+<label>Имя:
+<input type="text" name="name"><br/><br/>
+</label>
+<label>Фамилия:
+<input type="text" name="surname"><br/><br/>
+</label>
+<label>Зарплата:
+<input type="text" name="salary"><br/><br/>
+</label>
+<button type="submit">Создать</button>
+</form><br/>
+
+<a href="index.jsp">Домой</a>
+
+<script>
+document.getElementById('userForm').addEventListener('submit', function(event) {
+event.preventDefault();
+
+const formData = new FormData(event.target);
+const data = {};
+formData.forEach((value, key) => {
+data[key] = value;
+});
+
+fetch('add', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json'
+},
+body: JSON.stringify(data)
+})
+.then(response => response.text())
+.then(html => {
+document.body.innerHTML = html;
+})
+.catch(error => {
+console.error('Error:', error);
+});
+});
+</script>
+</body>
+</html>

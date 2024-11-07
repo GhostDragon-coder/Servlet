@@ -1,0 +1,28 @@
+package ru.appline;
+
+import java.io.PrintWriter;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import logic.Model;
+
+@WebServlet(urlPatterns = "/add")
+public class ServletAdd {
+	
+	private AtomicInteger counter = new AtomicInteger(5);
+	Model model = Model.getInstance();
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		response.setContentType("text/html;charset=utf-8");
+		
+		request.setCharacterEncoding("UTF-8");
+		
+
+		PrintWriter pw = response.getWriter();
+		
+		pw.println("Hello world!");
+	}
+}

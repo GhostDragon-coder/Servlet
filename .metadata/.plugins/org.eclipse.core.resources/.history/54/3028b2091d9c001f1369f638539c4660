@@ -1,0 +1,6 @@
+package logic;
+package ru.appline;
+
+public class User {
+
+}

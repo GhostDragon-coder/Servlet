@@ -1,0 +1,6 @@
+package logic;
+package logic.copy;
+
+public class User {
+
+}
